@@ -8,14 +8,13 @@ const VehicleSelector = ({ setVehicleId }) => {
     const resetFields = changedInput => {
         switch (changedInput) {
             case 'year': {
-                setMake(null);
-                setModel(null);
+                make && setMake(null);
+                model && setModel(null);
                 setVehicleId(null);
-                console.log('haayyooo');
                 break;
             }
             case 'make': {
-                setModel(null);
+                model && setModel(null);
                 setVehicleId(null);
                 break;
             }
@@ -68,7 +67,7 @@ const MakeSelector = ({ year, setMake, resetFields }) => {
     const [makes, setMakes] = useState([]);
 
     useEffect(() => {
-        setMakes([])
+        setMakes([]);
         makeMenuQuery('make?year=' + year).then(response => setMakes(response));
     }, [year]);
 
@@ -94,7 +93,13 @@ const ModelSelector = ({ year, make, setModel, resetFields }) => {
     const [models, setModels] = useState([]);
 
     useEffect(() => {
-        makeMenuQuery('model?year=' + year + '&make=' + make).then(response => setModels(response));
+        makeMenuQuery('model?year=' + year + '&make=' + make).then(response => {
+            if (Array.isArray(response)) {
+                setModels(response);
+            } else {
+                setModels([response]);
+            }
+        });
     }, [year, make]);
 
     return (
