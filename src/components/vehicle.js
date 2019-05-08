@@ -14,7 +14,7 @@ const Vehicle = ({ setVehicleMpg }) => {
         }
     }, [vehicleId]);
 
-    return <>{!vehicleData ? <VehicleSelector setVehicleId={setVehicleId} /> : <VehicleInfo vehicleData={vehicleData} />}</>;
+    return <>{!vehicleData ? <VehicleSelector setVehicleId={setVehicleId} /> : <VehicleInfo vehicleData={vehicleData} setVehicleData={setVehicleData} />}</>;
 };
 
 const getVehicleData = vehicleId => {
@@ -33,15 +33,16 @@ const getVehicleData = vehicleId => {
         });
 };
 
-const VehicleInfo = ({ vehicleData }) => {
+const VehicleInfo = ({ vehicleData, setVehicleData }) => {
     const { make, model, comb08 } = vehicleData;
     return (
         <div>
             <h4>
                 {make} {model}
             </h4>
+            <button onClick={() => setVehicleData(null)}>Change Vehicle</button>
             <p>
-                Average a combined <strong>{comb08} MPG</strong>
+                Averages a combined <strong>{comb08} MPG</strong>
             </p>
         </div>
     );

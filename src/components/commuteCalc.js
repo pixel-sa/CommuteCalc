@@ -7,15 +7,13 @@ const CommuteCalc = () => {
     const [costPerMile, setCostPerMile] = useState(0);
 
     useEffect(() => {
-        getGasPrices().then(resp => console.log(resp) || setGasPrices(resp));
+        getGasPrices().then(resp => setGasPrices(resp));
     }, []);
 
     useEffect(() => {
         if (gasPrices && vehicleMpg) {
-            console.log('doin it BIIIGG!!!');
-            const data = gasPrices.regular / vehicleMpg;
-            console.log(data);
-            setCostPerMile(data);
+            const cost = gasPrices.regular / vehicleMpg;
+            setCostPerMile(cost);
         }
     }, [vehicleMpg, gasPrices]);
 
