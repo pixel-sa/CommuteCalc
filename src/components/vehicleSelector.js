@@ -100,7 +100,7 @@ const ModelSelector = ({ year, make, setModel, resetFields }) => {
                 setModels([response]);
             }
         });
-    }, [year, make]);
+    }, [make]);
 
     return (
         <select
@@ -125,7 +125,6 @@ const OptionSelector = ({ year, make, model, setVehicleId }) => {
 
     useEffect(() => {
         makeMenuQuery('options?year=' + year + '&make=' + make + '&model=' + model).then(response => {
-            console.log(response);
             if (Array.isArray(response)) {
                 setOptions(response);
             } else {
@@ -133,7 +132,7 @@ const OptionSelector = ({ year, make, model, setVehicleId }) => {
                 setVehicleId(response.value);
             }
         });
-    }, [year, make, model]);
+    }, [model]);
 
     return (
         <>
