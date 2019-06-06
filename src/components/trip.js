@@ -19,9 +19,13 @@ const Trip = ({ setDistance }) => {
     };
 
     const bindPlacesListenersToInputs = () => {
-        /*global google*/ // To disable any eslint 'google not defined' errors
-        const startingLoc = new google.maps.places.Autocomplete(document.getElementById('startingLoc'));
-        const destinationLoc = new google.maps.places.Autocomplete(document.getElementById('destinationLoc'));
+        const options = {
+            types: ['address']
+        };
+        // To disable any eslint 'google not defined' errors
+        /*global google*/
+        const startingLoc = new google.maps.places.Autocomplete(document.getElementById('startingLoc'), options);
+        const destinationLoc = new google.maps.places.Autocomplete(document.getElementById('destinationLoc'), options);
         startingLoc.addListener('place_changed', () => startAutoCompleteEvent(startingLoc));
         destinationLoc.addListener('place_changed', () => destAutoCompleteEvent(destinationLoc));
     };
