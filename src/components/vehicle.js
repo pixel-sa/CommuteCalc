@@ -14,7 +14,15 @@ const Vehicle = ({ setVehicleMpg }) => {
         }
     }, [vehicleId]);
 
-    return <>{!vehicleData ? <VehicleSelector setVehicleId={setVehicleId} /> : <VehicleInfo vehicleData={vehicleData} setVehicleData={setVehicleData} />}</>;
+    return (
+        <>
+            {!vehicleData ? (
+                <VehicleSelector setVehicleId={setVehicleId} />
+            ) : (
+                <VehicleInfo vehicleData={vehicleData} setVehicleData={setVehicleData} />
+            )}
+        </>
+    );
 };
 
 const getVehicleData = vehicleId => {
